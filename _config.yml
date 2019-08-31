@@ -1,1 +1,4 @@
 theme: jekyll-theme-modernist
+title: 后台开发实践
+description: 后台开发练手项目
+permalink: /:title/
