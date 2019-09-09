@@ -91,29 +91,34 @@ Like为Post的点赞。
 
 ## 接口
 
-| Endpoint                   | 方法   | 说明                     |
-| -------------------------- | ------ | ------------------------ |
-| /users/                    | POST   | 创建用户                 |
-| /users/                    | GET    | 获取用户列表             |
-| /users/{id}/               | GET    | 获取指定ID的用户的信息   |
-| /users/{id}/followings/    | GET    | 获取指定ID用户的关注列表 |
-| /users/{id}/followers/     | GET    | 获取指定ID用户的粉丝列表 |
-| /users/{id}/posts/         | GET    | 获取指定ID用户的post列表 |
-| /user/                     | GET    | 获取当前登录用户的信息   |
-| /user/                     | PATCH  | 修改当前登录用户的信息   |
-| /authentications/          | POST   | 登录/获取Token           |
-| /authentications/          | DELETE | 注销/删除Token           |
-| /followings/               | POST   | 关注用户                 |
-| /followings/               | DELETE | 取消关注用户             |
-| /posts/                    | POST   | 创建post                 |
-| /posts/                    | GET    | 获取post列表             |
-| /posts/{id}/               | DELETE | 删除post，需要是作者     |
-| /posts/{id}/comments/      | POST   | 评论post                 |
-| /posts/{id}/comments/      | GET    | 获取指定ID的post的评论   |
-| /posts/{id}/comments/{id}/ | DELETE | 删除评论                 |
-| /posts/{id}/like/          | POST   | 点赞指定ID的post         |
-| /posts/{id}/like/          | DELETE | 取消指定ID的post         |
-| /posts/feed/               | GET    | 获取关注用户发的post     |
+接口采用[RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer)形式。
+
+| Endpoint                   | 方法   | 说明                       |
+| -------------------------- | ------ | -------------------------- |
+| /users/                    | POST   | 创建用户                   |
+| /users/                    | GET    | 获取用户列表               |
+| /users/{id}/               | GET    | 获取指定ID的用户的信息     |
+| /users/{id}/following/     | GET    | 获取指定ID用户的关注列表   |
+| /users/{id}/followers/     | GET    | 获取指定ID用户的粉丝列表   |
+| /users/{id}/posts/         | GET    | 获取指定ID用户的post列表   |
+| /user/                     | GET    | 获取当前登录用户的信息     |
+| /user/                     | PATCH  | 修改当前登录用户的信息     |
+| /user/following/           | GET    | 获取当前登录用户的关注列表 |
+| /user/following/{user_id}/ | POST   | 关注id为user_id的用户      |
+| /user/following/{user_id}/ | DELETE | 取消关注id为user_id的用户  |
+| /user/followers/           | GET    | 获取当前登录用户的粉丝列表 |
+| /user/posts/               | GET    | 获取当前登录用户的post列表 |
+| /authentications/          | POST   | 登录/获取Token             |
+| /authentications/          | DELETE | 注销/删除Token             |
+| /posts/                    | POST   | 创建post                   |
+| /posts/                    | GET    | 获取post列表               |
+| /posts/{id}/               | DELETE | 删除post，需要是作者       |
+| /posts/{id}/comments/      | POST   | 评论post                   |
+| /posts/{id}/comments/      | GET    | 获取指定ID的post的评论     |
+| /posts/{id}/comments/{id}/ | DELETE | 删除评论                   |
+| /posts/{id}/like/          | POST   | 点赞指定ID的post           |
+| /posts/{id}/like/          | DELETE | 取消指定ID的post           |
+| /posts/feed/               | GET    | 获取关注用户发的post       |
 
 限于篇幅，接口的调用参数和返回参数没有在表中给出，但基本与模型的字段一致，有以下几点需要注意：
 
@@ -124,3 +129,7 @@ Like为Post的点赞。
 * 没有设计在修改username/password/email时的邮件验证，没有忘记密码接口，因此email字段其实可有可无
 
 * ``POST /authentications/`` 传入用户名和密码，返回token
+
+## 总结
+
+在上面的系统设计中，指定了数据模型，是为了说明RESTful接口中传入和返回的数据格式，在实际实现中，数据库的表设计可以参考数据模型，但不要求完全一致。
